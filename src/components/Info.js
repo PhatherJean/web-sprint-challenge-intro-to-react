@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 export default function Info(props) {
+  console.log(props);
   const { characterId, close } = props;
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://swapi.dev/api/people/${characterId}`)
+      .get(characterId)
       .then((res) => {
+        console.log(res);
         setInfo(res.data);
       })
       .catch((err) => {
@@ -18,12 +21,12 @@ export default function Info(props) {
   }, [characterId]);
 
   return (
-    <div className="contain">
+    <StyleInfo className="contain">
       <h2>Stats:</h2>
       {info && (
         <>
-          <img src={info.url} alt={info.name} />
           <p>Name: {info.name}</p>
+          <p>Gender: {info.gender}</p>
           <p>Height: {info.height}</p>
           <p>Mass: {info.mass} </p>
           <p>Birth Year: {info.birth_year} </p>
@@ -33,6 +36,33 @@ export default function Info(props) {
         </>
       )}
       <button onClick={close}>Close</button>
-    </div>
+    </StyleInfo>
   );
 }
+const StyleInfo = styled.div`
+  h2 {
+    color: #adff2a;
+  }
+  color: #bada55;
+  padding: 2%;
+  background-color: #fff;
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  &:hover {
+    color: chocolate;
+    background-color: #bababa;
+  }
+  button {
+    color: brown;
+    &:hover {
+      transform: scale(1.1);
+      transform: rotate(360deg);
+      transition: all 0.5s ease-in-out;
+    }
+    transition: all 0.5s ease-in-out;
+  }
+`;

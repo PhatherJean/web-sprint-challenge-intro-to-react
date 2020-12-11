@@ -9,7 +9,7 @@ const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [charactersData, setCharactersData] = useState([]);
-  const [currentCharacter, setCurrentCharacter] = useState("1");
+  const [currentCharacter, setCurrentCharacter] = useState(null);
 
   const openDetails = (id) => {
     setCurrentCharacter(id);
@@ -26,6 +26,7 @@ const App = () => {
     axios
       .get("https://swapi.dev/api/people")
       .then((res) => {
+        console.log(res);
         setCharactersData(res.data.results);
       })
       .catch((err) => {
@@ -33,22 +34,25 @@ const App = () => {
         debugger;
       });
   }, []);
-  console.log(charactersData);
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
-      {charactersData.map((character) => {
-        return (
-          <Character
-            key={character.id}
-            character={character}
-            action={openDetails}
-          />
-        );
-      })}
-      {currentCharacter && (
-        <Info characterId={currentCharacter} close={closeDetails} />
-      )}
+      <div>
+        {charactersData.map((character) => {
+          return (
+            <Character
+              key={character.id}
+              character={character}
+              action={openDetails}
+            />
+          );
+        })}
+        <div>
+          {currentCharacter && (
+            <Info characterId={currentCharacter} close={closeDetails} />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
