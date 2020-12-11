@@ -13,10 +13,12 @@ export default function Character(props) {
 }
 
 const StyleChar = styled.div`
-  color: #bada55;
+  color: #2f4f4f;
+  text-shadow: 1px 1px #008080;
+  font-weight: bolder;
   border: 1px solid chocolate;
   padding: 2%;
-  background-color: white;
+  background-color: none;
   width: 75%;
   margin: 0 auto;
   display: flex;

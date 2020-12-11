@@ -58,9 +58,11 @@ const StyleInfo = styled.div`
   }
   button {
     color: brown;
+    width: 30%;
+    padding: 0 0.2%;
+    margin: 0 auto;
     &:hover {
       transform: scale(1.1);
-      transform: rotate(360deg);
       transition: all 0.5s ease-in-out;
     }
     transition: all 0.5s ease-in-out;
